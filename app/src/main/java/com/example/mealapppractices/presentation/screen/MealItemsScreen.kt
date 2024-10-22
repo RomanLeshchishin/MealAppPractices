@@ -3,23 +3,32 @@
 package com.example.mealapppractices.presentation.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.mealapppractices.presentation.main.MainViewModel
 
 @Composable
-fun MealItemsScreen(onMealItemClick: (String) -> Unit, categoryTitle: String) {
+fun MealItemsScreen(
+  onMealItemClick: (String) -> Unit,
+  categoryTitle: String,
+  navController: NavController
+) {
   val viewModel: MainViewModel = viewModel()
-  val mealItems = viewModel.mealItems.find { categoryTitle.lowercase() in it[0].title }
+  val mealItems = viewModel.mealItems.find { categoryTitle.lowercase() in it[0].title.lowercase() }
 
   if (mealItems != null) {
     Scaffold(modifier = Modifier.fillMaxSize(),
@@ -63,9 +72,29 @@ fun MealItemsScreen(onMealItemClick: (String) -> Unit, categoryTitle: String) {
         }
       }
     }
+    Button(
+      onClick = { navController.popBackStack() },
+      Modifier.padding(all = 5.dp)
+    ) {
+      Text(
+        text = "Назад",
+        color = Color.Black
+      )
+    }
   }
 
   else {
-    Text(text = "The dishes were not found", style = MaterialTheme.typography.bodyMedium)
+    Column {
+      Text(text = "The dishes were not found", style = MaterialTheme.typography.bodyMedium)
+      Button(
+        onClick = { navController.popBackStack() },
+        Modifier.padding(all = 5.dp)
+      ) {
+        Text(
+          text = "Назад",
+          color = Color.Black
+        )
+      }
+    }
   }
 }

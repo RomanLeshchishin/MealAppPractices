@@ -26,11 +26,12 @@ fun NavGraph(
       val categoryName = backStackEntry.arguments?.getString("categoryName") ?: ""
       MealItemsScreen({ mealItemId ->
         navController.navigate("category/$categoryName/$mealItemId") {} } ,
-        categoryTitle = categoryName
+        categoryTitle = categoryName,
+        navController
       )
     }
 
-    composable("category/{categoryName}/{categoryId}") { backStackEntry ->
+    composable("category/{categoryName}/{mealItemId}") { backStackEntry ->
       val mealItemId = backStackEntry.arguments?.getString("mealItemId") ?: ""
       MealItemDetailsScreen(mealItemId, navController)
     }
