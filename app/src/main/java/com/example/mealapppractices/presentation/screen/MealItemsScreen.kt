@@ -3,8 +3,6 @@
 package com.example.mealapppractices.presentation.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -62,9 +61,10 @@ fun MealItemsScreen(
                   painter = rememberAsyncImagePainter(mealItem.imgUrl),
                   contentDescription = null,
                   modifier = Modifier
-                    .size(170.dp)
+                    .size(150.dp)
+                    .clip(shape = RoundedCornerShape(10.dp))
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(mealItem.title, style = MaterialTheme.typography.titleLarge)
               }
             }
@@ -85,7 +85,11 @@ fun MealItemsScreen(
 
   else {
     Column {
-      Text(text = "The dishes were not found", style = MaterialTheme.typography.bodyMedium)
+      Text(
+        text = "The dishes were not found",
+        style = MaterialTheme.typography.bodyMedium,
+        modifier = Modifier.padding(start = 5.dp)
+      )
       Button(
         onClick = { navController.popBackStack() },
         Modifier.padding(all = 5.dp)

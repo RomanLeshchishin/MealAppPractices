@@ -8,5 +8,5 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NotificationsScreen() {
-  Text(text = "Settings Screen", modifier = Modifier.padding(16.dp))
+  Text(text = "Notifications Screen", modifier = Modifier.padding(16.dp))
 }
