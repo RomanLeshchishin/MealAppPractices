@@ -2,7 +2,7 @@ package com.example.mealapppractices.presentation.main
 
 import androidx.lifecycle.ViewModel
 import com.example.mealapppractices.data.MealItemDetailsExample
-import com.example.mealapppractices.mapper.MealDBToMealMapper
+import com.example.mealapppractices.data.mapper.MealsMapper
 import com.example.mealapppractices.presentation.model.Category
 import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
@@ -43,8 +43,8 @@ class MainViewModel : ViewModel() {
     ))
 
     _mealItemDetails.addAll(listOf(
-      MealDBToMealMapper().mapMealItemDetailsDB(MealItemDetailsExample[0]),
-      MealDBToMealMapper().mapMealItemDetailsDB(MealItemDetailsExample[1])
+      MealsMapper().mapMealsDetailsDB(MealItemDetailsExample[0]),
+      MealsMapper().mapMealsDetailsDB(MealItemDetailsExample[1])
     ))
   }
 }
