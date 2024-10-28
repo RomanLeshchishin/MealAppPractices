@@ -3,11 +3,14 @@ package com.example.mealapppractices.presentation.main
 import androidx.lifecycle.ViewModel
 import com.example.mealapppractices.data.MealItemDetailsExample
 import com.example.mealapppractices.data.mapper.MealsMapper
+import com.example.mealapppractices.domain.repository.IMealRepository
 import com.example.mealapppractices.presentation.model.Category
 import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+  private val repository: IMealRepository
+) : ViewModel() {
   private val _categories = mutableListOf<Category>()
   private val _mealItems = mutableListOf<List<MealItem>>()
   private val _mealItemDetails = mutableListOf<MealItemDetails>()

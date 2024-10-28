@@ -11,8 +11,11 @@ interface MealApi {
   suspend fun getCategories(): CategoriesPagingResponse
 
   @GET("filter.php?c={category}")
-  suspend fun getMeals(@Path("category") category: String?): MealsPagingResponse
+  suspend fun getMeals(@Path("category") category: String): MealsPagingResponse
+
+  @GET("lookup.php?i={meal}")
+  suspend fun getMealDetails(@Path("meal") meal: String): MealsDetailsPagingResponse
 
   @GET("search.php?s={meal}")
-  suspend fun getMealSDetails(@Path("meal") meal: String?): MealsDetailsPagingResponse
+  suspend fun getMealSDetails(@Path("meal") meal: String): MealsDetailsPagingResponse
 }
