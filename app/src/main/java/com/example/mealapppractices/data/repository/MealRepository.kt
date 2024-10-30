@@ -25,9 +25,9 @@ class MealRepository(
     }
   }
 
-  override suspend fun getMealDetails(meal: String): List<MealItemDetails> {
+  override suspend fun getMealsDetailsById(id: Int): List<MealItemDetails> {
     return withContext(Dispatchers.IO) {
-      mapper.mapMealsDetailsDB(api.getMealDetails(meal))
+      mapper.mapMealsDetailsDB(api.getMealsDetailsById(id))
     }
   }
 }

@@ -9,6 +9,27 @@ import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
 
 class MealsMapper {
+  fun mapCategoriesDB(categories: CategoriesPagingResponse): List<Category> {
+    return categories.categories?.map {
+      Category(
+        id = it?.idCategory.orEmpty(),
+        title = it?.strCategory.orEmpty(),
+        imgUrl = it?.strCategoryThumb.orEmpty(),
+        description = it?.strCategoryDescription.orEmpty()
+      )
+    }.orEmpty()
+  }
+
+  fun mapMealsDB(meals: MealsPagingResponse): List<MealItem> {
+    return meals.meals?.map {
+      MealItem(
+        id = it?.idMeal.orEmpty(),
+        title = it?.strMeal.orEmpty(),
+        imgUrl = it?.strMealThumb.orEmpty()
+      )
+    }.orEmpty()
+  }
+
   fun mapMealsDetailsDB(mealsDetails: MealsDetailsPagingResponse): List<MealItemDetails> {
     return mealsDetails.meals?.map {
       MealItemDetails(
@@ -28,27 +49,6 @@ class MealsMapper {
           Ingredient(it?.strIngredient4.orEmpty(), it?.strMeasure4.orEmpty()),
           Ingredient(it?.strIngredient5.orEmpty(), it?.strMeasure5.orEmpty())
         )
-      )
-    }.orEmpty()
-  }
-
-  fun mapMealsDB(meals: MealsPagingResponse): List<MealItem> {
-    return meals.meals?.map {
-      MealItem(
-        id = it?.idMeal.orEmpty(),
-        title = it?.strMeal.orEmpty(),
-        imgUrl = it?.strMealThumb.orEmpty()
-      )
-    }.orEmpty()
-  }
-
-  fun mapCategoriesDB(categories: CategoriesPagingResponse): List<Category> {
-    return categories.categories?.map {
-      Category(
-        id = it?.idCategory.orEmpty(),
-        title = it?.strCategory.orEmpty(),
-        imgUrl = it?.strCategoryThumb.orEmpty(),
-        description = it?.strCategoryDescription.orEmpty()
       )
     }.orEmpty()
   }

@@ -7,13 +7,13 @@ import org.koin.dsl.module
 import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
-  factory { provideRetrofit() }
   single { provideNetworkApi(get()) }
+  factory { provideRetrofit() }
 }
 
 fun provideRetrofit(): Retrofit {
   return Retrofit.Builder()
-    .baseUrl("www.themealdb.com/api/json/v1/1/")
+    .baseUrl("https://www.themealdb.com/api/json/v1/1/")
     .addConverterFactory(GsonConverterFactory.create())
     .client(OkHttpClient.Builder().build())
     .build()

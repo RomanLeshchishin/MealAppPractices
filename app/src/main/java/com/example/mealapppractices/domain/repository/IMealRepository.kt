@@ -9,5 +9,5 @@ interface IMealRepository {
 
   suspend fun getMeals(category: String): List<MealItem>
 
-  suspend fun getMealDetails(meal: String): List<MealItemDetails>
+  suspend fun getMealsDetailsById(id: Int): List<MealItemDetails>
 }
