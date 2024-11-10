@@ -9,8 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.mealapppractices.presentation.navigation.graph.NavGraph
-import com.example.mealapppractices.presentation.navigation.ui.BottomBar
+import com.example.mealapppractices.presentation.navigation.NavGraph
+import com.example.mealapppractices.ui.components.BottomBar
 import com.example.mealapppractices.presentation.screen.model.ScreenBar
 
 @Composable
