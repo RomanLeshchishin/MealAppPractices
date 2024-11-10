@@ -2,11 +2,13 @@ package com.example.mealapppractices.presentation.screen.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class ScreenBar (
@@ -30,11 +32,18 @@ sealed class ScreenBar (
     unsetIcon = HOME_UNSET_ICON
   )
 
-  data object Notifications : ScreenBar(
-    route = NOTIFICATIONS_ROUTE,
-    title = NOTIFICATIONS_TITLE,
-    setIcon = NOTIFICATIONS_SET_ICON,
-    unsetIcon = NOTIFICATIONS_UNSET_ICON
+  data object Favorite : ScreenBar(
+    route = FAVORITE_ROUTE,
+    title = FAVORITE_TITLE,
+    setIcon = FAVORITE_SET_ICON,
+    unsetIcon = FAVORITE_UNSET_ICON
+  )
+
+  data object Settings : ScreenBar(
+    route = SETTINGS_ROUTE,
+    title = SETTINGS_TITLE,
+    setIcon = SETTINGS_SET_ICON,
+    unsetIcon = SETTINGS_UNSET_ICON
   )
 
   companion object{
@@ -48,9 +57,14 @@ sealed class ScreenBar (
     private val HOME_SET_ICON = Icons.Filled.Home
     private val HOME_UNSET_ICON = Icons.Outlined.Home
 
-    private const val NOTIFICATIONS_ROUTE = "notifications"
-    private const val NOTIFICATIONS_TITLE = "Уведомления"
-    private val NOTIFICATIONS_SET_ICON = Icons.Filled.Notifications
-    private val NOTIFICATIONS_UNSET_ICON = Icons.Outlined.Notifications
+    private const val FAVORITE_ROUTE = "favorite"
+    private const val FAVORITE_TITLE = "Любимые блюда"
+    private val FAVORITE_SET_ICON = Icons.Filled.Favorite
+    private val FAVORITE_UNSET_ICON = Icons.Outlined.Favorite
+
+    private const val SETTINGS_ROUTE = "settings"
+    private const val SETTINGS_TITLE = "Настройки"
+    private val SETTINGS_SET_ICON = Icons.Filled.Settings
+    private val SETTINGS_UNSET_ICON = Icons.Outlined.Settings
   }
 }

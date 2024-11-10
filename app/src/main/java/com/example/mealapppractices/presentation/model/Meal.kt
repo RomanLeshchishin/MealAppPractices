@@ -1,6 +1,14 @@
 package com.example.mealapppractices.presentation.model
 
+class Area(
+  val area: String
+)
+
 class Ingredient(
+  val ingredient: String
+)
+
+class IngredientMeasure(
   val ingredient: String,
   val measure: String
 )
@@ -28,5 +36,5 @@ data class MealItemDetails(
   val imgUrl: String,
   val tags: List<String>,
   val videoUrl: String,
-  val ingredients: List<Ingredient>
+  val ingredients: List<IngredientMeasure>
 )

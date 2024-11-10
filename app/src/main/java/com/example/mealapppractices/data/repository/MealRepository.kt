@@ -3,7 +3,9 @@ package com.example.mealapppractices.data.repository
 import com.example.mealapppractices.data.api.MealApi
 import com.example.mealapppractices.data.mapper.MealsMapper
 import com.example.mealapppractices.domain.repository.IMealRepository
+import com.example.mealapppractices.presentation.model.Area
 import com.example.mealapppractices.presentation.model.Category
+import com.example.mealapppractices.presentation.model.Ingredient
 import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +21,33 @@ class MealRepository(
     }
   }
 
-  override suspend fun getMeals(category: String): List<MealItem> {
+  override suspend fun getMealsByCategory(category: String): List<MealItem> {
     return withContext(Dispatchers.IO) {
-      mapper.mapMealsDB(api.getMeals(category))
+      mapper.mapMealsDB(api.getMealsByCategory(category))
+    }
+  }
+
+  override suspend fun getMealsByArea(area: String): List<MealItem> {
+    return withContext(Dispatchers.IO) {
+      mapper.mapMealsDB(api.getMealsByArea(area))
+    }
+  }
+
+  override suspend fun getMealsByIngredient(ingredient: String): List<MealItem> {
+    return withContext(Dispatchers.IO) {
+      mapper.mapMealsDB(api.getMealsByIngredient(ingredient))
+    }
+  }
+
+  override suspend fun getAreas(): List<Area> {
+    return withContext(Dispatchers.IO) {
+      mapper.mapAreasDB(api.getAreas())
+    }
+  }
+
+  override suspend fun getIngredients(): List<Ingredient> {
+    return withContext(Dispatchers.IO) {
+      mapper.mapIngredientsDB(api.getIngredients())
     }
   }
 

@@ -76,7 +76,7 @@ fun CategoriesScreen(navController: NavHostController) {
               Column {
                 Text(category.title, style = MaterialTheme.typography.titleLarge)
                 Text(
-                  text = SubText(category.description),
+                  text = subText(category.description),
                   style = MaterialTheme.typography.bodyLarge
                 )
               }
@@ -92,7 +92,7 @@ fun CategoriesScreen(navController: NavHostController) {
   }
 }
 
-fun SubText(text: String): String {
+fun subText(text: String): String {
   if (text.length > 90)
   {
     return text.substring(0, 90) + "..."

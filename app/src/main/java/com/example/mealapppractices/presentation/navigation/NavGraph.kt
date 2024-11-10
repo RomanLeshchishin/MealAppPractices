@@ -5,10 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.mealapppractices.presentation.screen.CategoriesScreen
+import com.example.mealapppractices.presentation.screen.FavoriteMealsScreen
 import com.example.mealapppractices.presentation.screen.HomeScreen
 import com.example.mealapppractices.presentation.screen.MealItemDetailsScreen
 import com.example.mealapppractices.presentation.screen.MealItemsScreen
-import com.example.mealapppractices.presentation.screen.NotificationsScreen
+import com.example.mealapppractices.presentation.screen.SettingsScreen
 import com.example.mealapppractices.presentation.screen.model.ScreenBar
 
 @Composable
@@ -35,8 +36,12 @@ fun NavGraph(
       HomeScreen()
     }
 
-    composable(ScreenBar.Notifications.route) {
-      NotificationsScreen()
+    composable(ScreenBar.Favorite.route) {
+      FavoriteMealsScreen()
+    }
+
+    composable(ScreenBar.Settings.route) {
+      SettingsScreen()
     }
   }
 }

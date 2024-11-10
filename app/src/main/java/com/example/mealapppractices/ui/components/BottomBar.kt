@@ -17,7 +17,7 @@ fun BottomBar(
   val items = listOf(
     ScreenBar.Home,
     ScreenBar.Categories,
-    ScreenBar.Notifications
+    ScreenBar.Settings
   )
 
   val navBackStackEntry by navController.currentBackStackEntryAsState()

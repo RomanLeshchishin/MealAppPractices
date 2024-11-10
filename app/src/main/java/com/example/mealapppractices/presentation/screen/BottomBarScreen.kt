@@ -22,7 +22,8 @@ fun BottomBarScreen(navController: NavHostController) {
   val screens = listOf(
     ScreenBar.Categories.route,
     ScreenBar.Home.route,
-    ScreenBar.Notifications.route
+    ScreenBar.Favorite.route,
+    ScreenBar.Settings.route
   )
 
   val showBottomBar = currentDestination?.route in screens

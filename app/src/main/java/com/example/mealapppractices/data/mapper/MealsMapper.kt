@@ -1,10 +1,14 @@
 package com.example.mealapppractices.data.mapper
 
+import com.example.mealapppractices.data.model.AreasPagingResponse
 import com.example.mealapppractices.data.model.CategoriesPagingResponse
+import com.example.mealapppractices.data.model.IngredientsPagingResponse
 import com.example.mealapppractices.data.model.MealsDetailsPagingResponse
 import com.example.mealapppractices.data.model.MealsPagingResponse
+import com.example.mealapppractices.presentation.model.Area
 import com.example.mealapppractices.presentation.model.Category
 import com.example.mealapppractices.presentation.model.Ingredient
+import com.example.mealapppractices.presentation.model.IngredientMeasure
 import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
 
@@ -30,6 +34,22 @@ class MealsMapper {
     }.orEmpty()
   }
 
+  fun mapAreasDB(areas: AreasPagingResponse): List<Area> {
+    return areas.meals?.map {
+      Area(
+        area = it?.strArea.orEmpty()
+      )
+    }.orEmpty()
+  }
+
+  fun mapIngredientsDB(ingredients: IngredientsPagingResponse): List<Ingredient> {
+    return ingredients.meals?.map {
+      Ingredient(
+        ingredient = it?.strIngredient.orEmpty()
+      )
+    }.orEmpty()
+  }
+
   fun mapMealsDetailsDB(mealsDetails: MealsDetailsPagingResponse): List<MealItemDetails> {
     return mealsDetails.meals?.map {
       MealItemDetails(
@@ -43,11 +63,11 @@ class MealsMapper {
         tags = it?.strTags?.split(',').orEmpty(),
         videoUrl = it?.strYoutube.orEmpty(),
         ingredients = listOf(
-          Ingredient(it?.strIngredient1.orEmpty(), it?.strMeasure1.orEmpty()),
-          Ingredient(it?.strIngredient2.orEmpty(), it?.strMeasure2.orEmpty()),
-          Ingredient(it?.strIngredient3.orEmpty(), it?.strMeasure3.orEmpty()),
-          Ingredient(it?.strIngredient4.orEmpty(), it?.strMeasure4.orEmpty()),
-          Ingredient(it?.strIngredient5.orEmpty(), it?.strMeasure5.orEmpty())
+          IngredientMeasure(it?.strIngredient1.orEmpty(), it?.strMeasure1.orEmpty()),
+          IngredientMeasure(it?.strIngredient2.orEmpty(), it?.strMeasure2.orEmpty()),
+          IngredientMeasure(it?.strIngredient3.orEmpty(), it?.strMeasure3.orEmpty()),
+          IngredientMeasure(it?.strIngredient4.orEmpty(), it?.strMeasure4.orEmpty()),
+          IngredientMeasure(it?.strIngredient5.orEmpty(), it?.strMeasure5.orEmpty())
         )
       )
     }.orEmpty()

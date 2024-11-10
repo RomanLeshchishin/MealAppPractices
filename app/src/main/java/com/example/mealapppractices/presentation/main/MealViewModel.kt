@@ -1,6 +1,5 @@
 package com.example.mealapppractices.presentation.main
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,7 +25,7 @@ class MealViewModel(
       mutableMealState.meals = emptyList()
       mutableMealState.error = null
 
-      mutableMealState.meals = repository.getMeals(viewState.category)
+      mutableMealState.meals = repository.getMealsByCategory(viewState.category)
     }
   }
 

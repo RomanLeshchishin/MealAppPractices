@@ -7,6 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun NotificationsScreen() {
-  Text(text = "Notifications Screen", modifier = Modifier.padding(16.dp))
+fun FavoriteMealsScreen() {
+  Text(text = "Favorite Meals Screen", modifier = Modifier.padding(16.dp))
 }

@@ -19,12 +19,9 @@ import androidx.navigation.NavController
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.mealapppractices.presentation.main.MealDetailsViewModel
-import com.example.mealapppractices.presentation.screen.model.ScreenBar
-import com.example.mealapppractices.ui.components.FullScreenProgress
 import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("SuspiciousIndentation")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MealItemDetailsScreen(
   mealId: String,
