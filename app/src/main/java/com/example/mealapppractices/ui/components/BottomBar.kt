@@ -1,4 +1,4 @@
-package com.example.mealapppractices.presentation.navigation.ui
+package com.example.mealapppractices.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.NavigationBar

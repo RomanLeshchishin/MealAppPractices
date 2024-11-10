@@ -5,43 +5,61 @@ package com.example.mealapppractices.presentation.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
-import com.example.mealapppractices.presentation.main.MainViewModel
+import com.example.mealapppractices.presentation.handlers.CategoriesScreenHandler
+import com.example.mealapppractices.presentation.main.CategoryViewModel
 import com.example.mealapppractices.presentation.screen.model.ScreenBar
+import com.example.mealapppractices.ui.components.FullScreenProgress
+import org.koin.androidx.compose.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CategoriesScreen(onCategoryClick: (String) -> Unit) {
-  val viewModel: MainViewModel = viewModel()
+fun CategoriesScreen(navController: NavHostController) {
+  val handler = CategoriesScreenHandler(navController)
+  val viewModel = koinViewModel<CategoryViewModel>()
+  val state = viewModel.viewState
 
   Scaffold(modifier = Modifier.fillMaxSize(),
     topBar = {
-      TopAppBar(
-        title = {
-          CenterAlignedTopAppBar(title = {
-            Text(
-              text = ScreenBar.Categories.title ?: "Нет названия"
-            )
-          })
-        }
+      Text(
+        text = ScreenBar.Categories.title ?: "Нет названия",
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier
+          .padding(start = 10.dp)
       )
     }
   ) { innerPadding ->
+    Column {
+      state.error?.let {
+        Row(modifier = Modifier.padding(top = 50.dp)) {
+          Icon(
+            imageVector = Icons.Default.Refresh,
+            contentDescription = null,
+            Modifier.clickable { viewModel.onReloadClicked() }
+          )
+          Spacer(modifier = Modifier.width(8.dp))
+          Text(text = it)
+        }
+      }
+    }
     LazyColumn(
       modifier = Modifier
         .padding(innerPadding)
     ) {
-      items(viewModel.categories) { category ->
+      items(state.categories) { category ->
         ListItem(
           modifier = Modifier
-            .clickable { onCategoryClick(category.title) }
+            .clickable { handler.onToCategories(category.title) }
             .padding(8.dp),
           headlineContent = {
             Row(
@@ -57,12 +75,30 @@ fun CategoriesScreen(onCategoryClick: (String) -> Unit) {
               Spacer(modifier = Modifier.width(8.dp))
               Column {
                 Text(category.title, style = MaterialTheme.typography.titleLarge)
-                Text(category.description, style = MaterialTheme.typography.bodyLarge)
+                Text(
+                  text = SubText(category.description),
+                  style = MaterialTheme.typography.bodyLarge
+                )
               }
             }
           }
         )
       }
     }
+  }
+
+  if (state.loading) {
+    FullScreenProgress()
+  }
+}
+
+fun SubText(text: String): String {
+  if (text.length > 90)
+  {
+    return text.substring(0, 90) + "..."
+  }
+  else
+  {
+    return text.substring(0, text.length)
   }
 }

@@ -21,7 +21,7 @@ data class MealItem(
 data class MealItemDetails(
   val id: String,
   val title: String,
-  val drinkAlternate: String?,
+  val drinkAlternate: String,
   val category: String,
   val area: String,
   val instructions: String,
