@@ -2,7 +2,7 @@ package com.example.mealapppractices.presentation.screen.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.AccountCircle
@@ -18,11 +18,11 @@ sealed class ScreenBar (
   val unsetIcon: ImageVector? = null
 ){
 
-  data object Categories : ScreenBar(
-    route = CATEGORIES_ROUTE,
-    title = CATEGORIES_TITLE,
-    setIcon = CATEGORIES_SET_ICON,
-    unsetIcon = CATEGORIES_UNSET_ICON
+  data object Main : ScreenBar(
+    route = MAIN_ROUTE,
+    title = MAIN_TITLE,
+    setIcon = MAIN_SET_ICON,
+    unsetIcon = MAIN_UNSET_ICON
   )
 
   data object Home : ScreenBar(
@@ -47,10 +47,11 @@ sealed class ScreenBar (
   )
 
   companion object{
-    private const val CATEGORIES_ROUTE = "categories"
-    private const val CATEGORIES_TITLE = "Категории блюд"
-    private val CATEGORIES_SET_ICON = Icons.Filled.AccountCircle
-    private val CATEGORIES_UNSET_ICON = Icons.Outlined.AccountCircle
+
+    private const val MAIN_ROUTE = "main"
+    private const val MAIN_TITLE = "Блюда"
+    private val MAIN_SET_ICON = Icons.Filled.AccountCircle
+    private val MAIN_UNSET_ICON = Icons.Outlined.AccountCircle
 
     private const val HOME_ROUTE = "home"
     private const val HOME_TITLE = "Домашняя страница"
@@ -59,8 +60,8 @@ sealed class ScreenBar (
 
     private const val FAVORITE_ROUTE = "favorite"
     private const val FAVORITE_TITLE = "Любимые блюда"
-    private val FAVORITE_SET_ICON = Icons.Filled.Favorite
-    private val FAVORITE_UNSET_ICON = Icons.Outlined.Favorite
+    private val FAVORITE_SET_ICON = Icons.Outlined.Favorite
+    private val FAVORITE_UNSET_ICON = Icons.Filled.FavoriteBorder
 
     private const val SETTINGS_ROUTE = "settings"
     private const val SETTINGS_TITLE = "Настройки"

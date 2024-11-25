@@ -1,8 +1,6 @@
 package com.example.mealapppractices.domain.repository
 
-import com.example.mealapppractices.presentation.model.Area
 import com.example.mealapppractices.presentation.model.Category
-import com.example.mealapppractices.presentation.model.Ingredient
 import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
 
@@ -15,9 +13,9 @@ interface IMealRepository {
 
   suspend fun getMealsByIngredient(ingredient: String): List<MealItem>
 
-  suspend fun getAreas(): List<Area>
+  suspend fun getAreas(): List<String>
 
-  suspend fun getIngredients(): List<Ingredient>
+  suspend fun getIngredients(): List<String>
 
   suspend fun getMealsDetailsById(id: Int): List<MealItemDetails>
 }

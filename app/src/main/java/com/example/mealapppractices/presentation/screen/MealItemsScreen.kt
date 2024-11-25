@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.example.mealapppractices.presentation.screen
 
 import android.annotation.SuppressLint
@@ -24,7 +22,6 @@ import com.example.mealapppractices.presentation.handlers.MealItemsScreenHandler
 import com.example.mealapppractices.presentation.main.MealViewModel
 import org.koin.androidx.compose.koinViewModel
 
-@SuppressLint("SuspiciousIndentation")
 @Composable
 fun MealItemsScreen(
   categoryTitle: String,
@@ -35,67 +32,67 @@ fun MealItemsScreen(
   viewModel.onCategoryClick(categoryTitle)
   val state = viewModel.viewState
 
-    Scaffold(modifier = Modifier.fillMaxSize(),
-      topBar = {
-        Row {
-          Button(
-            onClick = { navController.popBackStack() },
-            Modifier.padding(all = 5.dp)
-          ) {
-            Text(
-              text = "Назад",
-              color = Color.Black
-            )
-          }
+  Scaffold(modifier = Modifier.fillMaxSize(),
+    topBar = {
+      Row {
+        Button(
+          onClick = { navController.popBackStack() },
+          Modifier.padding(all = 5.dp)
+        ) {
           Text(
-            text = categoryTitle,
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier
-              .padding(top = 15.dp, start = 15.dp)
+            text = "Назад",
+            color = Color.Black
           )
         }
+        Text(
+          text = categoryTitle,
+          style = MaterialTheme.typography.titleLarge,
+          modifier = Modifier
+            .padding(top = 15.dp, start = 15.dp)
+        )
       }
-    ) { innerPadding ->
-      Column {
-        state.error?.let {
-          Row(modifier = Modifier.padding(top = 50.dp)) {
-            Icon(
-              imageVector = Icons.Default.Refresh,
-              contentDescription = null,
-              Modifier.clickable { viewModel.onReloadClicked() }
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(text = it)
-          }
-        }
-      }
-      LazyColumn(
-        modifier = Modifier
-          .padding(innerPadding)
-      ) {
-        items(state.meals) { meal ->
-          ListItem(
-            modifier = Modifier
-              .clickable { handler.onToMeals(categoryTitle, meal.id) }
-              .padding(8.dp),
-            headlineContent = {
-              Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-              ) {
-                Image(
-                  painter = rememberAsyncImagePainter(meal.imgUrl),
-                  contentDescription = null,
-                  modifier = Modifier
-                    .size(150.dp)
-                    .clip(shape = RoundedCornerShape(10.dp))
-                )
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(meal.title, style = MaterialTheme.typography.titleLarge)
-              }
-            }
+    }
+  ) { innerPadding ->
+    Column {
+      state.error?.let {
+        Row(modifier = Modifier.padding(top = 50.dp)) {
+          Icon(
+            imageVector = Icons.Default.Refresh,
+            contentDescription = null,
+            Modifier.clickable { viewModel.onReloadClicked() }
           )
+          Spacer(modifier = Modifier.width(8.dp))
+          Text(text = it)
         }
       }
     }
+    LazyColumn(
+      modifier = Modifier
+        .padding(innerPadding)
+    ) {
+      items(state.meals) { meal ->
+        ListItem(
+          modifier = Modifier
+            .clickable { handler.onToCategoryMeals(categoryTitle, meal.id) }
+            .padding(8.dp),
+          headlineContent = {
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Image(
+                painter = rememberAsyncImagePainter(meal.imgUrl),
+                contentDescription = null,
+                modifier = Modifier
+                  .size(150.dp)
+                  .clip(shape = RoundedCornerShape(10.dp))
+              )
+              Spacer(modifier = Modifier.width(10.dp))
+              Text(meal.title, style = MaterialTheme.typography.titleLarge)
+            }
+          }
+        )
+      }
+    }
+  }
 }

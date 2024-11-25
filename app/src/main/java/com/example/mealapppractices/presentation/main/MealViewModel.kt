@@ -20,7 +20,7 @@ class MealViewModel(
   private fun loadMeals() {
     viewModelScope.launchLoadingAndError(
       handleError = { mutableMealState.error = it.localizedMessage },
-      updateLoading = {mutableMealState.loading = it }
+      updateLoading = { mutableMealState.loading = it }
     ) {
       mutableMealState.meals = emptyList()
       mutableMealState.error = null

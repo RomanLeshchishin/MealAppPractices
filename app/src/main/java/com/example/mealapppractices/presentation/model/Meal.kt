@@ -1,13 +1,5 @@
 package com.example.mealapppractices.presentation.model
 
-class Area(
-  val area: String
-)
-
-class Ingredient(
-  val ingredient: String
-)
-
 class IngredientMeasure(
   val ingredient: String,
   val measure: String

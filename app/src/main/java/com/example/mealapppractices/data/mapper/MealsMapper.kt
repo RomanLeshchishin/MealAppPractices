@@ -5,9 +5,7 @@ import com.example.mealapppractices.data.model.CategoriesPagingResponse
 import com.example.mealapppractices.data.model.IngredientsPagingResponse
 import com.example.mealapppractices.data.model.MealsDetailsPagingResponse
 import com.example.mealapppractices.data.model.MealsPagingResponse
-import com.example.mealapppractices.presentation.model.Area
 import com.example.mealapppractices.presentation.model.Category
-import com.example.mealapppractices.presentation.model.Ingredient
 import com.example.mealapppractices.presentation.model.IngredientMeasure
 import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
@@ -34,19 +32,15 @@ class MealsMapper {
     }.orEmpty()
   }
 
-  fun mapAreasDB(areas: AreasPagingResponse): List<Area> {
+  fun mapAreasDB(areas: AreasPagingResponse): List<String> {
     return areas.meals?.map {
-      Area(
-        area = it?.strArea.orEmpty()
-      )
+      it?.strArea.orEmpty()
     }.orEmpty()
   }
 
-  fun mapIngredientsDB(ingredients: IngredientsPagingResponse): List<Ingredient> {
+  fun mapIngredientsDB(ingredients: IngredientsPagingResponse): List<String> {
     return ingredients.meals?.map {
-      Ingredient(
-        ingredient = it?.strIngredient.orEmpty()
-      )
+      it?.strIngredient.orEmpty()
     }.orEmpty()
   }
 

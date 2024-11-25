@@ -1,5 +1,6 @@
 [versions]
 agp = "8.6.0"
+datastorePreferences = "1.1.1"
 kotlin = "1.9.0"
 koinAndroid = "4.0.0"
 koinAndroidxCompose = "4.0.0"
@@ -15,14 +16,20 @@ composeBom = "2024.04.01"
 navigationCompose = "2.8.2"
 coilCompose = "2.7.0"
 retrofit = "2.11.0"
+roomRuntime = "2.6.1"
+datastoreCoreAndroid = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
@@ -38,6 +45,7 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComp
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+androidx-datastore-core-android = { group = "androidx.datastore", name = "datastore-core-android", version.ref = "datastoreCoreAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

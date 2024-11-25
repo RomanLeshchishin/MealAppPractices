@@ -3,9 +3,7 @@ package com.example.mealapppractices.data.repository
 import com.example.mealapppractices.data.api.MealApi
 import com.example.mealapppractices.data.mapper.MealsMapper
 import com.example.mealapppractices.domain.repository.IMealRepository
-import com.example.mealapppractices.presentation.model.Area
 import com.example.mealapppractices.presentation.model.Category
-import com.example.mealapppractices.presentation.model.Ingredient
 import com.example.mealapppractices.presentation.model.MealItem
 import com.example.mealapppractices.presentation.model.MealItemDetails
 import kotlinx.coroutines.Dispatchers
@@ -39,13 +37,13 @@ class MealRepository(
     }
   }
 
-  override suspend fun getAreas(): List<Area> {
+  override suspend fun getAreas(): List<String> {
     return withContext(Dispatchers.IO) {
       mapper.mapAreasDB(api.getAreas())
     }
   }
 
-  override suspend fun getIngredients(): List<Ingredient> {
+  override suspend fun getIngredients(): List<String> {
     return withContext(Dispatchers.IO) {
       mapper.mapIngredientsDB(api.getIngredients())
     }

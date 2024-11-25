@@ -16,7 +16,7 @@ fun BottomBar(
 ) {
   val items = listOf(
     ScreenBar.Home,
-    ScreenBar.Categories,
+    ScreenBar.Favorite,
     ScreenBar.Settings
   )
 

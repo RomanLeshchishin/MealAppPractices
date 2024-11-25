@@ -24,6 +24,7 @@ import org.koin.androidx.compose.koinViewModel
 @SuppressLint("SuspiciousIndentation")
 @Composable
 fun MealItemDetailsScreen(
+  areaTitle: String?,
   mealId: String,
   navController: NavController
 ) {
