@@ -6,6 +6,7 @@ import com.example.mealapppractices.presentation.model.MealItem
 
 @Stable
 interface MainState {
+  val isShowBadge: Boolean
   val categories: List<Category>
   val mealsByArea: List<MealItem>
   val area: String

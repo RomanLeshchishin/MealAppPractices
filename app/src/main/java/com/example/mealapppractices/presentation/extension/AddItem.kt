@@ -3,6 +3,8 @@ package com.example.mealapppractices.presentation.extension
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.Info
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
@@ -19,6 +21,7 @@ fun RowScope.AddItem(
   screen: ScreenBar,
   destination: NavDestination?,
   navController: NavHostController,
+  isBadge: Boolean
 ) {
   NavigationBarItem(
     selected = destination?.hierarchy?.any {
@@ -31,17 +34,25 @@ fun RowScope.AddItem(
       }
     },
     icon = {
-      Icon(
-        imageVector = if (destination?.hierarchy?.any {
-            it.route == screen.route
-          } == true
-        ) {
-          screen.setIcon
-        } else {
-          screen.unsetIcon
-        } ?: Icons.TwoTone.Info,
-        contentDescription = screen.title
-      )
+      BadgedBox(
+        badge = {
+          if (isBadge && screen.title == ScreenBar.Settings.title) {
+            Badge ()
+          }
+        }
+      ) {
+        Icon(
+          imageVector = if (destination?.hierarchy?.any {
+              it.route == screen.route
+            } == true
+          ) {
+            screen.setIcon
+          } else {
+            screen.unsetIcon
+          } ?: Icons.TwoTone.Info,
+          contentDescription = screen.title
+        )
+      }
     },
     label = {
       Text(

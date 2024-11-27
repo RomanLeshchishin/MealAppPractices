@@ -13,6 +13,8 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,8 +35,9 @@ fun MealItemDetailsScreen(
   val viewModel = koinViewModel<MealDetailsViewModel>()
   viewModel.onMealItemClick(mealId.toInt())
   val state = viewModel.viewState
-  var isFavorite = viewModel.getIsFavorite(mealId)
-  val icon = if (isFavorite)
+  val isFavorite = remember { mutableStateOf(false) }
+  isFavorite.value = viewModel.getIsFavorite(mealId)
+  val icon = if (isFavorite.value)
     Icons.Default.Favorite
   else
     Icons.Default.FavoriteBorder
@@ -60,6 +63,7 @@ fun MealItemDetailsScreen(
               .size(40.dp)
               .clickable {
                 viewModel.onFavoriteClicked(mealId.toInt())
+                isFavorite.value = !isFavorite.value
               }
           )
         }
