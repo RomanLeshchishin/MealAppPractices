@@ -1,13 +1,9 @@
 package com.example.mealapppractices.presentation.main
 
 import android.content.Context
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -44,6 +40,7 @@ class MainViewModel(
     viewModelScope.launch {
       defaultAreaFlow.collect {
         setArea(it)
+        mutableMainState.isShowBadge = it != ""
       }
     }
     loadMealsByArea()
@@ -78,6 +75,7 @@ class MainViewModel(
       savePreferences(DEFAULT_AREA, area)
     }
     setArea(area)
+    mutableMainState.isShowBadge = true
   }
 
   fun onReloadClicked() {
@@ -89,9 +87,11 @@ class MainViewModel(
       savePreferences(DEFAULT_AREA, "")
     }
     setArea("")
+    mutableMainState.isShowBadge = false
   }
 
   private class MutableMainState: MainState {
+    override var isShowBadge: Boolean by mutableStateOf(false)
     override var categories: List<Category> by mutableStateOf(emptyList())
     override var mealsByArea: List<MealItem> by mutableStateOf(emptyList())
     override var area: String by mutableStateOf("")
