@@ -1,6 +1,5 @@
 package com.example.mealapppractices.presentation.screen
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -73,12 +72,11 @@ fun MealItemsScreen(
       items(state.meals) { meal ->
         ListItem(
           modifier = Modifier
-            .clickable { handler.onToCategoryMeals(categoryTitle, meal.id) }
             .padding(8.dp),
           headlineContent = {
             Row(
               modifier = Modifier.fillMaxWidth(),
-              verticalAlignment = Alignment.CenterVertically
+              verticalAlignment = Alignment.Top
             ) {
               Image(
                 painter = rememberAsyncImagePainter(meal.imgUrl),
@@ -88,7 +86,12 @@ fun MealItemsScreen(
                   .clip(shape = RoundedCornerShape(10.dp))
               )
               Spacer(modifier = Modifier.width(10.dp))
-              Text(meal.title, style = MaterialTheme.typography.titleLarge)
+              Text(
+                meal.title,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                  .clickable { handler.onToCategoryMeals(categoryTitle, meal.id) }
+              )
             }
           }
         )

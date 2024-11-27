@@ -1,6 +1,7 @@
 
 package com.example.mealapppractices.presentation.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -57,7 +58,7 @@ fun MainScreen(
         ListCategories(categoriesHandler, state.categories)
       }
       else {
-        ListMeals(mealsHandler, state.mealsByArea, state.area)
+        ListMeals(mealsHandler, state.mealsByArea, state.area, viewModel)
       }
     }
   if (state.loading) {

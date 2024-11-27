@@ -18,4 +18,10 @@ interface IMealRepository {
   suspend fun getIngredients(): List<String>
 
   suspend fun getMealsDetailsById(id: Int): List<MealItemDetails>
+
+  suspend fun saveMeal(meal: MealItemDetails)
+
+  suspend fun getSavedMeals(): List<MealItemDetails>
+
+  suspend fun deleteMeal(meal: MealItemDetails)
 }

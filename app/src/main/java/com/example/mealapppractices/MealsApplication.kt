@@ -1,6 +1,7 @@
 package com.example.mealapppractices
 
 import android.app.Application
+import com.example.mealapppractices.di.dbModule
 import com.example.mealapppractices.di.networkModule
 import com.example.mealapppractices.di.rootModule
 import org.koin.core.context.startKoin
@@ -13,7 +14,7 @@ class MealsApplication : Application() {
     startKoin {
       androidLogger()
       androidContext(this@MealsApplication)
-      modules(rootModule, networkModule)
+      modules(rootModule, networkModule, dbModule)
     }
   }
 }

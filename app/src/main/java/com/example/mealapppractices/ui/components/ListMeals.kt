@@ -2,6 +2,7 @@ package com.example.mealapppractices.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +12,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,10 +25,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.mealapppractices.presentation.handlers.MealItemsScreenHandler
+import com.example.mealapppractices.presentation.main.MainViewModel
 import com.example.mealapppractices.presentation.model.MealItem
 
 @Composable
-fun ListMeals(handler: MealItemsScreenHandler, listItems: List<MealItem>, area: String) {
+fun ListMeals(
+  handler: MealItemsScreenHandler,
+  listItems: List<MealItem>,
+  area: String,
+  viewModel: MainViewModel
+) {
   LazyColumn(
     modifier = Modifier
       .padding(10.dp)
@@ -41,7 +51,7 @@ fun ListMeals(handler: MealItemsScreenHandler, listItems: List<MealItem>, area: 
         headlineContent = {
           Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.Top
           ) {
             Image(
               painter = rememberAsyncImagePainter(item.imgUrl),

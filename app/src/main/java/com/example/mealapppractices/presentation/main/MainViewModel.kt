@@ -1,9 +1,13 @@
 package com.example.mealapppractices.presentation.main
 
 import android.content.Context
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -15,6 +19,7 @@ import com.example.mealapppractices.coroutinesUtils.launchLoadingAndError
 import com.example.mealapppractices.domain.repository.IMealRepository
 import com.example.mealapppractices.presentation.model.Category
 import com.example.mealapppractices.presentation.model.MealItem
+import com.example.mealapppractices.presentation.model.MealItemDetails
 import com.example.mealapppractices.presentation.state.MainState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -27,8 +32,11 @@ class MainViewModel(
   private val context: Context
 ): ViewModel() {
 
+  private var favoriteMeals: List<MealItemDetails> = emptyList()
+
   val DEFAULT_AREA = stringPreferencesKey("default_area")
   val defaultAreaFlow: Flow<String> = getPreferences(DEFAULT_AREA)
+
   private val mutableMainState = MutableMainState()
   val viewState = mutableMainState as MainState
 
@@ -50,6 +58,7 @@ class MainViewModel(
       mutableMainState.categories = emptyList()
       mutableMainState.error = null
 
+      favoriteMeals = repository.getSavedMeals()
       if (viewState.area == "") {
         mutableMainState.categories = repository.getCategories()
       }
