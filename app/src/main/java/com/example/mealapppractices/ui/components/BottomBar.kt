@@ -8,7 +8,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mealapppractices.presentation.extension.AddItem
+import com.example.mealapppractices.presentation.main.MainViewModel
 import com.example.mealapppractices.presentation.screen.model.ScreenBar
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun BottomBar(
@@ -16,18 +18,23 @@ fun BottomBar(
 ) {
   val items = listOf(
     ScreenBar.Home,
-    ScreenBar.Categories,
-    ScreenBar.Notifications
+    ScreenBar.Main,
+    ScreenBar.Favorite,
+    ScreenBar.Settings
   )
 
   val navBackStackEntry by navController.currentBackStackEntryAsState()
   val destination = navBackStackEntry?.destination
+  val viewModel = koinViewModel<MainViewModel>()
+  val viewState = viewModel.viewState
+
   NavigationBar {
     items.forEach { screen ->
       AddItem(
         screen = screen,
         destination = destination,
         navController = navController,
+        isBadge = viewState.isShowBadge
       )
     }
   }

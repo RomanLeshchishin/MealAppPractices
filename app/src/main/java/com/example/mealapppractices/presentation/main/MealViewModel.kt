@@ -1,6 +1,5 @@
 package com.example.mealapppractices.presentation.main
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,11 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.mealapppractices.coroutinesUtils.launchLoadingAndError
 import com.example.mealapppractices.domain.repository.IMealRepository
 import com.example.mealapppractices.presentation.model.MealItem
+import com.example.mealapppractices.presentation.model.MealItemDetails
 import com.example.mealapppractices.presentation.state.MealState
 
 class MealViewModel(
   private val repository: IMealRepository
 ): ViewModel() {
+
+  private var favoriteMeals: List<MealItemDetails> = emptyList()
 
   private val mutableMealState = MutableMealState()
   val viewState = mutableMealState as MealState
@@ -21,12 +23,13 @@ class MealViewModel(
   private fun loadMeals() {
     viewModelScope.launchLoadingAndError(
       handleError = { mutableMealState.error = it.localizedMessage },
-      updateLoading = {mutableMealState.loading = it }
+      updateLoading = { mutableMealState.loading = it }
     ) {
       mutableMealState.meals = emptyList()
       mutableMealState.error = null
 
-      mutableMealState.meals = repository.getMeals(viewState.category)
+      favoriteMeals = repository.getSavedMeals()
+      mutableMealState.meals = repository.getMealsByCategory(viewState.category)
     }
   }
 

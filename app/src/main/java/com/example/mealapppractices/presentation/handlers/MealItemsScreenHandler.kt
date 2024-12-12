@@ -7,9 +7,17 @@ import com.example.mealapppractices.presentation.screen.model.ScreenBar
 class MealItemsScreenHandler(
   val navController: NavHostController
 ) {
-  fun onToMeals(category: String, id: String)
+  fun onToMeals(area: String, id: String)
   {
-    navController.navigate(ScreenBar.Categories.route + "/$category" + "/$id")
+    navController.navigate(ScreenBar.Main.route + "/$area" + "/$id")
+    if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+      navController.popBackStack()
+    }
+  }
+
+  fun onToCategoryMeals(category: String, id: String)
+  {
+    navController.navigate(ScreenBar.Main.route + "/$category" + "/$id")
     if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
       navController.popBackStack()
     }

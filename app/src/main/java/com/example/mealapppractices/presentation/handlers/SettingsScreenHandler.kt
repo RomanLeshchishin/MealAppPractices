@@ -4,11 +4,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import com.example.mealapppractices.presentation.screen.model.ScreenBar
 
-class CategoriesScreenHandler(
+class SettingsScreenHandler(
   val navController: NavHostController
 ) {
-  fun onToCategories(category: String) {
-    navController.navigate(ScreenBar.Main.route + "/$category")
+  fun onToSave()
+  {
+    navController.navigate(ScreenBar.Main.route)
     if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
       navController.popBackStack()
     }

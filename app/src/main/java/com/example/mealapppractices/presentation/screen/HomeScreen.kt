@@ -9,4 +9,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomeScreen() {
   Text(text = "Home Screen", modifier = Modifier.padding(16.dp))
+  //фильтрация по стране или по ингридиенту + выбор сортировки: по стране или по ингридиенту + "сохранить"
+  //красный или оранжевый индикатор для настроек как в уведомлениях при недефолтных настройках
 }

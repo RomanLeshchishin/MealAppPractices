@@ -8,9 +8,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,30 +23,48 @@ import androidx.navigation.NavController
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.mealapppractices.presentation.main.MealDetailsViewModel
-import com.example.mealapppractices.presentation.screen.model.ScreenBar
-import com.example.mealapppractices.ui.components.FullScreenProgress
 import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("SuspiciousIndentation")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MealItemDetailsScreen(
+  areaTitle: String?,
   mealId: String,
   navController: NavController
 ) {
   val viewModel = koinViewModel<MealDetailsViewModel>()
   viewModel.onMealItemClick(mealId.toInt())
   val state = viewModel.viewState
+  val isFavorite = remember { mutableStateOf(false) }
+  isFavorite.value = viewModel.getIsFavorite(mealId)
+  val icon = if (isFavorite.value)
+    Icons.Default.Favorite
+  else
+    Icons.Default.FavoriteBorder
 
     Scaffold(modifier = Modifier.fillMaxSize(),
       topBar = {
-        Button(
-          onClick = { navController.popBackStack() },
-          Modifier.padding(all = 5.dp)
-        ) {
-          Text(
-            text = "Назад",
-            color = Color.Black
+        Row {
+          Button(
+            onClick = { navController.popBackStack() },
+            Modifier.padding(all = 5.dp)
+          ) {
+            Text(
+              text = "Назад",
+              color = Color.Black
+            )
+          }
+          Icon(
+            imageVector = icon,
+            contentDescription = null,
+            Modifier
+              .padding(start = 250.dp)
+              .align(Alignment.CenterVertically)
+              .size(40.dp)
+              .clickable {
+                viewModel.onFavoriteClicked(mealId.toInt())
+                isFavorite.value = !isFavorite.value
+              }
           )
         }
       }
@@ -78,7 +100,7 @@ fun MealItemDetailsScreen(
                   modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
                 Image(
-                  painter = rememberAsyncImagePainter(mealDetail .imgUrl),
+                  painter = rememberAsyncImagePainter(mealDetail.imgUrl),
                   contentDescription = null,
                   modifier = Modifier
                     .size(350.dp)
@@ -86,14 +108,24 @@ fun MealItemDetailsScreen(
                     .clip(shape = RoundedCornerShape(10.dp))
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Text(text ="Категория: " + mealDetail.category, style = MaterialTheme.typography.bodyLarge)
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Страна: " + mealDetail.area, style = MaterialTheme.typography.bodyLarge)
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Описание: " + mealDetail.instructions, style = MaterialTheme.typography.bodyMedium)
+                Text(
+                  text = "Категория: " + mealDetail.category,
+                  style = MaterialTheme.typography.bodyLarge
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                  text = "Ингридиенты: " + mealDetail.ingredients.map { "${it.ingredient} - ${it.measure}; " }.joinToString(""),
+                  text = "Страна: " + mealDetail.area,
+                  style = MaterialTheme.typography.bodyLarge
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                  text = "Описание: " + mealDetail.instructions,
+                  style = MaterialTheme.typography.bodyMedium
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                  text = "Ингридиенты: " + mealDetail.ingredients.map { "${it.ingredient} - ${it.measure}; " }
+                    .joinToString(""),
                   style = MaterialTheme.typography.bodyLarge
                 )
               }
