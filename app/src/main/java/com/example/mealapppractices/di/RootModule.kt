@@ -15,6 +15,7 @@ import com.example.mealapppractices.presentation.main.MealDetailsViewModel
 import com.example.mealapppractices.presentation.main.MainViewModel
 import com.example.mealapppractices.presentation.main.MealViewModel
 import com.example.mealapppractices.presentation.main.ProfileViewModel
+import com.example.mealapppractices.presentation.mapper.ProfileUIMapper
 import org.koin.dsl.module
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -25,6 +26,7 @@ val rootModule = module {
 
   single<IProfileRepository> { ProfileRepository() }
   factory<DataStore<ProfileEntity>>(named("profile")) { DataSourceProvider(get()).provide() }
+  factory { ProfileUIMapper() }
 
   viewModel { MainViewModel(get(), get()) }
 

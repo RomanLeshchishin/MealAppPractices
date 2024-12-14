@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.mealapppractices.presentation.screen.EditProfileScreen
 import com.example.mealapppractices.presentation.screen.FavoriteMealsScreen
 import com.example.mealapppractices.presentation.screen.MealItemDetailsScreen
 import com.example.mealapppractices.presentation.screen.MainScreen
@@ -39,7 +40,11 @@ fun NavGraph(
     }
 
     composable(ScreenBar.Profile.route) {
-      ProfileScreen()
+      ProfileScreen(navController)
+    }
+
+    composable("editProfile") {
+      EditProfileScreen(navController)
     }
 
     composable(ScreenBar.Favorite.route) {

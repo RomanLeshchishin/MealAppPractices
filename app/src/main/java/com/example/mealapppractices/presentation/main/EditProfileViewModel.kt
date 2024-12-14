@@ -81,7 +81,7 @@ class EditProfileViewModel(
     override var portfolioUrl: String by mutableStateOf("")
     override var position: String by mutableStateOf("")
     override var grade: Grade by mutableStateOf(Grade.UNRECOGNIZED)
-    override var isNeedToShowPermission: Boolean by mutableStateOf(false)
+    override var isNeedToShowPermission by mutableStateOf(false)
     override var isNeedToShowSelect: Boolean by mutableStateOf(false)
   }
 }
