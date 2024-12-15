@@ -1,6 +1,5 @@
 package com.example.mealapppractices.presentation.screen
 
-import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
@@ -8,8 +7,10 @@ import android.net.Uri
 import android.os.Environment
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -40,6 +41,8 @@ import com.example.mealapppractices.presentation.screen.model.ScreenBar
 import com.example.mealapppractices.presentation.utils.SystemBroadcastReceiver
 import org.koin.androidx.compose.koinViewModel
 import java.io.File
+
+const val DOWNLOAD_COMPLETE_ACTION = "android.intent.action.DOWNLOAD_COMPLETE"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,19 +90,18 @@ fun ProfileScreen(navController: NavHostController) {
           error = painterResource(R.drawable.mobile_phone)
         )
         Text(text = state.profile.name, style = MaterialTheme.typography.titleLarge)
+        Spacer(modifier = Modifier.height(8.dp))
         Text(text = state.profile.position, style = MaterialTheme.typography.titleLarge)
+        Spacer(modifier = Modifier.height(8.dp))
         Button(onClick = { enqueueDownloadRequest(state.profile.portfolioUrl, context) }) {
           Text(text = "Резюме")
         }
-        Text(text = state.profile.grade.name, style = MaterialTheme.typography.titleLarge)
-        Text(text = state.profile.gradeDescription, style = MaterialTheme.typography.titleLarge)
       }
     }
   }
 
   @Composable
   private fun InitBroadcastReceiver(context: Context) {
-    val DOWNLOAD_COMPLETE_ACTION = "android.intent.action.DOWNLOAD_COMPLETE"
     SystemBroadcastReceiver(
       systemAction = DOWNLOAD_COMPLETE_ACTION,
       onSystemEvent = { intent ->

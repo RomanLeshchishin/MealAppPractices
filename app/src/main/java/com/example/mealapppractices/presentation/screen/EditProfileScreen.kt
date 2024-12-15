@@ -78,17 +78,16 @@ fun EditProfileScreen(
     ) { isGranted: Boolean ->
       if (!isGranted) {
         val dialog = AlertDialog.Builder(context)
-          .setMessage("Ну, так не пойдет...")
+          .setMessage("Пожалуйста, предоставьте разрешения.")
           .setCancelable(false)
           .setPositiveButton("OK") { _, _ ->
-            navController.popBackStack()
           }
         dialog.show()
       }
       viewModel.onPermissionClosed()
     }
 
-  val mGetContent = rememberLauncherForActivityResult<Uri, Boolean>(
+  val mGetContent = rememberLauncherForActivityResult(
     ActivityResultContracts.TakePicture()
   ) { success: Boolean ->
     if (success) {
@@ -205,8 +204,7 @@ fun EditProfileScreen(
 
   if (state.isNeedToShowPermission) {
     LaunchedEffect(Unit) {
-      if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q &&
-        ContextCompat.checkSelfPermission(
+      if (ContextCompat.checkSelfPermission(
           context,
           Manifest.permission.WRITE_EXTERNAL_STORAGE
         ) != PackageManager.PERMISSION_GRANTED
