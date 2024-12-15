@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_package = "com.example.mealapppractices.domain.model";
+option java_multiple_files = true;
+
+message ProfileEntity {
+  string photo_uri = 1;
+  string name = 2;
+  string position = 3;
+  Grade grade = 4;
+  string url = 5;
+}
+
+enum Grade {
+  FIRST_CATEGORY = 0;
+  SECOND_CATEGORY = 1;
+  THIRD_CATEGORY = 2;
+  FOURTH_CATEGORY = 3;
+  FIFTH_CATEGORY = 4;
+  SIXTH_CATEGORY = 5;
+}

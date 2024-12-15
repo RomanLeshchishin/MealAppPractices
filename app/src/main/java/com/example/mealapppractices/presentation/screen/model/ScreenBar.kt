@@ -2,12 +2,12 @@ package com.example.mealapppractices.presentation.screen.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -25,11 +25,11 @@ sealed class ScreenBar (
     unsetIcon = MAIN_UNSET_ICON
   )
 
-  data object Home : ScreenBar(
-    route = HOME_ROUTE,
-    title = HOME_TITLE,
-    setIcon = HOME_SET_ICON,
-    unsetIcon = HOME_UNSET_ICON
+  data object Profile : ScreenBar(
+    route = PROFILE_ROUTE,
+    title = PROFILE_TITLE,
+    setIcon = PROFILE_SET_ICON,
+    unsetIcon = PROFILE_UNSET_ICON
   )
 
   data object Favorite : ScreenBar(
@@ -53,10 +53,10 @@ sealed class ScreenBar (
     private val MAIN_SET_ICON = Icons.Filled.AccountCircle
     private val MAIN_UNSET_ICON = Icons.Outlined.AccountCircle
 
-    private const val HOME_ROUTE = "home"
-    private const val HOME_TITLE = "Домашняя страница"
-    private val HOME_SET_ICON = Icons.Filled.Home
-    private val HOME_UNSET_ICON = Icons.Outlined.Home
+    private const val PROFILE_ROUTE = "profile"
+    private const val PROFILE_TITLE = "Профиль"
+    private val PROFILE_SET_ICON = Icons.Filled.Face
+    private val PROFILE_UNSET_ICON = Icons.Outlined.Face
 
     private const val FAVORITE_ROUTE = "favorite"
     private const val FAVORITE_TITLE = "Любимые блюда"

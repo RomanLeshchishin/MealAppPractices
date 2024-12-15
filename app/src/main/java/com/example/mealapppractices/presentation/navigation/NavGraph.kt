@@ -4,11 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.mealapppractices.presentation.screen.EditProfileScreen
 import com.example.mealapppractices.presentation.screen.FavoriteMealsScreen
-import com.example.mealapppractices.presentation.screen.HomeScreen
 import com.example.mealapppractices.presentation.screen.MealItemDetailsScreen
 import com.example.mealapppractices.presentation.screen.MainScreen
 import com.example.mealapppractices.presentation.screen.MealItemsScreen
+import com.example.mealapppractices.presentation.screen.ProfileScreen
 import com.example.mealapppractices.presentation.screen.SettingsScreen
 import com.example.mealapppractices.presentation.screen.model.ScreenBar
 
@@ -38,8 +39,12 @@ fun NavGraph(
       MealItemDetailsScreen(areaName, mealId, navController)
     }
 
-    composable(ScreenBar.Home.route) {
-      HomeScreen()
+    composable(ScreenBar.Profile.route) {
+      ProfileScreen(navController)
+    }
+
+    composable("editProfile") {
+      EditProfileScreen(navController)
     }
 
     composable(ScreenBar.Favorite.route) {
