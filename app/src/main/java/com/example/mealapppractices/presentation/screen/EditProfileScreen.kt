@@ -11,8 +11,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,11 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.toSize
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
@@ -57,14 +51,6 @@ fun EditProfileScreen(
   val viewModel = koinViewModel<EditProfileViewModel>()
   val state = viewModel.viewState
 
-//  var expanded by remember { mutableStateOf(false) }
-//  var textfieldSize by remember { mutableStateOf(Size.Zero) }
-//  var setSelectedText by remember { mutableStateOf("") }
-//  val icon = if (expanded)
-//    Icons.Filled.KeyboardArrowUp
-//  else
-//    Icons.Filled.KeyboardArrowDown
-
   var imageUri by remember { mutableStateOf<Uri?>(null) }
 
   val pickMedia: ActivityResultLauncher<PickVisualMediaRequest> =
@@ -78,9 +64,11 @@ fun EditProfileScreen(
     ) { isGranted: Boolean ->
       if (!isGranted) {
         val dialog = AlertDialog.Builder(context)
-          .setMessage("Пожалуйста, предоставьте разрешения.")
+          .setMessage("Пожалуйста, предоставьте разрешение на доступ к файлам на устройстве.")
           .setCancelable(false)
           .setPositiveButton("OK") { _, _ ->
+          }.setNeutralButton("NO"){_, _, ->
+            navController.popBackStack()
           }
         dialog.show()
       }
@@ -168,37 +156,6 @@ fun EditProfileScreen(
           .fillMaxWidth()
           .padding(top = 16.dp)
       )
-//      OutlinedTextField(
-//        value = state.grade.name,
-//        onValueChange = {  setSelectedText = it },
-//        modifier = Modifier
-//          .fillMaxWidth()
-//          .onGloballyPositioned { coordinates ->
-//              textfieldSize = coordinates.size.toSize()
-//                                },
-//        label = {Text("Label")},
-//        trailingIcon = {
-//            Icon(icon,"contentDescription",
-//              Modifier.clickable { expanded = !expanded })
-//        }
-//      )
-//      DropdownMenu(
-//        expanded = expanded,
-//        onDismissRequest = { expanded = false },
-//        modifier = Modifier
-//            .width(with(LocalDensity.current){textfieldSize.width.toDp()})
-//      ) {
-//          areaState.areas.forEach { label ->
-//            DropdownMenuItem(
-//              text = { Text(label) },
-//              onClick = {
-//                setSelectedText = label
-//                viewModel.onGradeChange(label)
-//                expanded = false
-//              },
-//            )
-//          }
-//        }
     }
   }
 
